@@ -1,0 +1,62 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "A boilerplate to scaffold app backends",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run setup && npm run dev",
+    "setup": "npm run migrate && npm run seed",
+    "create_migration": "sequelize migration:create  --name=sample-migration",
+    "create_seeder": "sequelize seed:create --name=sample-seeder",
+    "seed": "sequelize db:seed:all",
+    "migrate": "sequelize db:migrate --migrations-path ./server/core/db/migrations",
+    "undo_all_seed": "sequelize db:seed:undo:all",
+    "undo_seed": "sequelize db:seed:undo",
+    "undo_all_migration": "sequelize db:migrate:undo:all",
+    "undo_migration": "sequelize db:migrate:undo",
+    "compile": "babel server --out-dir dist --delete-dir-on-start --source-maps inline --copy-files",
+    "dev": "npm run compile && cross-env NODE_ENV=development node dist/index.js",
+    "watch": "nodemon --exec babel-node server/index.js",
+    "test": "jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm lint:fix",
+      "pre-push": "npm test"
+    }
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pm2": "^4.2.3",
+    "winston": "^3.2.0",
+    "jsonwebtoken": "^8.1.0",
+    "chalk": "^3.0.0",
+    "cross-env": "^7.0.2",
+    "swagger-express-middleware": "^4.0.0",
+    "sequelize": "^5.21.5",
+    "pg": "^7.18.2",
+    "sequelize-auto-migrations": "^1.0.3",
+    "sequelize-cli": "^5.5.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/register": "^7.8.3",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "nodemon": "^2.0.2",
+    "jest": "^25.1.0",
+    "husky": "^4.2.3"
+  }
+}

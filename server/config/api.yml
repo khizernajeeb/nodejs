@@ -1,0 +1,33 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Swagger sample
+  description: A sample API that demonstrates Swagger Express Middleware features
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+definitions:
+  sample:
+    required:
+      - success
+      - data
+    properties:
+      success:
+        type: boolean
+      data:
+        type: array
+        items:
+          type: object
+
+paths:
+  /example/sample:
+    get:
+      description: Returns sample data
+      responses:
+        default:
+          description: Returns sample data
+          schema:
+            $ref: '#/definitions/sample'
